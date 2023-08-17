@@ -9,7 +9,7 @@ import java.util.Properties;
 public class FileReader {
     private static final String PATH_PROPERTIES = System.getProperty("user.dir")
             + File.separator + "src" + File.separator + "main" +
-            File.separator + "resources" + File.separator + "Properties" + File.separator;
+            File.separator + "resources" + File.separator;
     public Properties getProperties(String name) throws IOException {
         Properties properties = new Properties();
         InputStream inputStream = null;
