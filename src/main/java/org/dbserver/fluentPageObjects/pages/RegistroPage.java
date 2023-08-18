@@ -15,51 +15,45 @@ public class RegistroPage {
 
     public RegistroPage(WebDriver driver) {
         this.driver = driver;
-        espera = new WebDriverWait(driver, 3);
+        espera = new WebDriverWait(driver, 15);
         PageFactory.initElements(new AjaxElementLocatorFactory(driver,15),this);
     }
 
-    @FindBy(xpath = "//button[text()='Registrar']")
-    WebElement botaoRegistrar;
-    @FindBy(name = "email")
+    @FindBy(xpath = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[2]/input")
     WebElement campoEmail;
     @FindBy(name = "name")
     WebElement campoNome;
-    @FindBy(name = "password")
+    @FindBy(xpath = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[4]/div/input")
     WebElement campoSenha;
     @FindBy(name = "passwordConfirmation")
     WebElement campoConfirmarSenha;
     @FindBy(className = "styles__Input-sc-1pngcbh-1")
     WebElement botaoCriarContaComSaldo;
-    @FindBy(xpath = "//button[text()='Acessar']")
+    @FindBy(xpath = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button")
     WebElement botaoCadastrar;
-    @FindBy(className = "styles__Button-sc-8zteav-5")
+    @FindBy(id = "btnCloseModal")
     WebElement botaoFecharModal;
-
-
-    public RegistroPage registrar(){
-        this.botaoRegistrar.click();
-        espera.until(ExpectedConditions.invisibilityOfElementLocated(By.className("card__register")));
-        return new RegistroPage(driver);
-    }
 
     public RegistroPage paginaCadastro(String email,
                                        String nome,
                                        String senha,
                                        String confirmacaoSenha){
-        this.botaoRegistrar.click();
-        espera.until(ExpectedConditions.invisibilityOfElementLocated(By.className("card__register")));
         this.campoEmail.sendKeys(email);
         this.campoNome.sendKeys(nome);
         this.campoSenha.sendKeys(senha);
         this.campoConfirmarSenha.sendKeys(confirmacaoSenha);
         this.botaoCriarContaComSaldo.click();
         this.botaoCadastrar.click();
+        espera.until(ExpectedConditions.elementToBeClickable(botaoFecharModal));
+        this.botaoFecharModal.click();
         return new RegistroPage(driver);
     }
-
-    public RegistroPage fecharModal(){
-        this.botaoFecharModal.click();
+    public RegistroPage limparCampos(){
+        espera.until(ExpectedConditions.elementToBeClickable(By.className("card__register")));
+        this.campoEmail.clear();
+        this.campoNome.clear();
+        this.campoSenha.clear();
+        this.campoConfirmarSenha.clear();
         return new RegistroPage(driver);
     }
 

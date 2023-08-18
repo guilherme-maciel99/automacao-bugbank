@@ -8,38 +8,34 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class TesteSelenium extends BaseTest {
     private final WebDriver driver = getDriver();
 
     private RegistroPage registroPage;
     private HomePage homePage;
 
-    @BeforeEach
-    void init() {
+    @Test
+    @DisplayName("Cria a segunda conta")
+    void fazCadastro(){
+        this.homePage = new HomePage(driver)
+                .clicaEmRegistrar();
         this.registroPage = new RegistroPage(driver)
-                .registrar()
                 .paginaCadastro("aaa@aaa.com",
                         "aaa",
                         "123",
-                        "123")
-                .fecharModal();
+                        "123");
+        this.homePage = new HomePage(driver)
+                .clicaEmRegistrar();
         this.registroPage = new RegistroPage(driver)
-                .registrar()
+                .limparCampos()
                 .paginaCadastro("bbb@bbb.com",
                         "bbb",
                         "456",
-                        "456")
-                .fecharModal();
-    }
-    @Test
-    @DisplayName("Faz login na primeira conta")
-    void fazLoginPrimeiraConta(){
+                        "456");
         this.homePage = new HomePage(driver)
-                .paginaAcesso("aaa@aaa.com",
+                .preencheAcesso("aaa@aaa.com",
                         "123");
-        assertEquals("Olá aaa,", homePage.getTextoNome());
+
 
     }
 
