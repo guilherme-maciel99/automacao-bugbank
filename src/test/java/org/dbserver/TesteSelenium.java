@@ -48,7 +48,7 @@ public class TesteSelenium extends BaseTest {
                         "456",
                         true)
                 .fecharModal();
-        numeroContaTransferencia = listaContas.getContaPorPosicao(1);
+        numeroContaTransferencia = listaContas.getContaPorPosicao();
         separadorConta = numeroContaTransferencia.split("-");
         conta = Integer.parseInt(separadorConta[0]);
         digito = Integer.parseInt(separadorConta[1]);

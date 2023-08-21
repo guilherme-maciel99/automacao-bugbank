@@ -6,18 +6,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ListaContas {
-    List<String> numeroContas = new ArrayList<>();
+    String numeroConta;
 
     public void adicionarNumeroConta(String texto){
         String regex = "\\b\\d{3}-\\d\\b";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(texto);
         if (matcher.find()) {
-            numeroContas.add(matcher.group());
+            this.numeroConta = matcher.group();
         }
     }
-    public String getContaPorPosicao(int pos){
-        return numeroContas.get(pos);
+    public String getContaPorPosicao(){
+        return this.numeroConta;
     }
 
 
