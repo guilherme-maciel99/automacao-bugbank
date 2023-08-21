@@ -44,17 +44,20 @@ public class RegistroPage {
     @FindBy(id = "modalText")
     WebElement textoNumeroConta;
 
+
     public RegistroPage paginaCadastro(String email,
                                        String nome,
                                        String senha,
-                                       String confirmacaoSenha){
+                                       String confirmacaoSenha,
+                                       boolean saldoAtivado){
         espera.until(ExpectedConditions.elementToBeClickable(By.className("card__register")));
         this.campoEmail.sendKeys(email);
         this.campoNome.sendKeys(nome);
         this.campoSenha.sendKeys(senha);
         this.campoConfirmarSenha.sendKeys(confirmacaoSenha);
-        if(!this.botaoCriarContaComSaldo.isSelected())
+        if(!saldoAtivado){
             this.botaoCriarContaComSaldo.click();
+        }
         this.botaoCadastrar.click();
         return new RegistroPage(driver, listaContas);
     }

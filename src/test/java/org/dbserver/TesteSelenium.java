@@ -35,7 +35,8 @@ public class TesteSelenium extends BaseTest {
                 .paginaCadastro("aaa@aaa.com",
                         "aaa",
                         "123",
-                        "123")
+                        "123",
+                        false)
                 .fecharModal();
         this.homePage = new HomePage(driver)
                 .clicaEmRegistrar();
@@ -44,7 +45,8 @@ public class TesteSelenium extends BaseTest {
                 .paginaCadastro("bbb@bbb.com",
                         "bbb",
                         "456",
-                        "456")
+                        "456",
+                        true)
                 .fecharModal();
         numeroContaTransferencia = listaContas.getContaPorPosicao(1);
         separadorConta = numeroContaTransferencia.split("-");
