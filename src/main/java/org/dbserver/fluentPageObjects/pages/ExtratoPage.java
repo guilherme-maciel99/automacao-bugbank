@@ -17,21 +17,23 @@ public class ExtratoPage {
     WebElement textoDescricao;
     @FindBy(id = "textTransferValue")
     WebElement textoValorTransferido;
-    @FindBy(className = "transfer__BackText-sc-1yjpf2r-5 gWmJSZ")
+    @FindBy(id = "textBalanceAvailable")
+    WebElement textoValorSaldo;
+    @FindBy(id = "btnBack")
     WebElement botaoVoltarPagina;
     public ExtratoPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 15), this);
     }
 
-    public ExtratoPage sairConta() {
+
+    public ExtratoPage abrirExtrato(){
         this.botaoExtrato.click();
         return new ExtratoPage(driver);
     }
 
-    public ExtratoPage voltarPagina() {
-        this.botaoVoltarPagina.click();
-        return new ExtratoPage(driver);
+    public String verificarSaldo(){
+        return this.textoValorSaldo.getText();
     }
     public String getTextoTipoTransferencia() {
         return textoTipoTransferencia.getText();

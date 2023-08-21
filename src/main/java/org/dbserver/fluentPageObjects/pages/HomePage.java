@@ -1,5 +1,6 @@
 package org.dbserver.fluentPageObjects.pages;
 
+import org.dbserver.utils.ListaContas;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,8 +28,7 @@ public class HomePage {
     WebElement botaoAcessar;
     @FindBy(xpath = "//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[3]/button[2]")
     WebElement botaoRegistrar;
-    @FindBy(id = "textName")
-    WebElement textoNome;
+
 
     public HomePage preencheAcesso(String email,String senha){
         this.campoEmail.sendKeys(email);
@@ -41,10 +41,6 @@ public class HomePage {
         espera.until(ExpectedConditions.elementToBeClickable(By.className("card__register")));
         this.botaoRegistrar.click();
         return new HomePage(driver);
-    }
-
-    public String getTextoNome(){
-        return textoNome.getText();
     }
 
 }

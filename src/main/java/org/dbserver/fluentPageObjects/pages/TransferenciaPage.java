@@ -5,13 +5,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TransferenciaPage {
 
     WebDriver driver;
+    WebDriverWait espera;
 
     public TransferenciaPage(WebDriver driver) {
         this.driver = driver;
+        espera = new WebDriverWait(driver, 15);
         PageFactory.initElements(new AjaxElementLocatorFactory(driver,15),this);
     }
 
@@ -25,11 +29,11 @@ public class TransferenciaPage {
     WebElement campoTransferirValor;
     @FindBy(name = "description")
     WebElement campoDescricao;
-    @FindBy(className = "style__ContainerButton-sc-1wsixal-0 CMabB button__child")
+    @FindBy(xpath = "//*[@id=\"__next\"]/div/div[3]/form/button")
     WebElement botaoConfirmarTransferencia;
-    @FindBy(className = "styles__Button-sc-8zteav-5 gyHUvN")
+    @FindBy(id = "btnCloseModal")
     WebElement botaoFecharModal;
-    @FindBy(className = "transfer__BackText-sc-1yjpf2r-5 gWmJSZ")
+    @FindBy(id = "btnBack")
     WebElement botaoVoltarPagina;
 
     public TransferenciaPage menuTransferencia(){
@@ -51,6 +55,7 @@ public class TransferenciaPage {
     }
 
     public TransferenciaPage fecharModal(){
+        espera.until(ExpectedConditions.elementToBeClickable(botaoFecharModal));
         this.botaoFecharModal.click();
         this.botaoVoltarPagina.click();
         return new TransferenciaPage(driver);

@@ -14,7 +14,7 @@ public class DeslogarPage {
         PageFactory.initElements(new AjaxElementLocatorFactory(driver,15),this);
     }
 
-    @FindBy(className = "styles__Link-sc-osobjw-0 xzjxU")
+    @FindBy(id = "btnExit")
     WebElement botaoSair;
 
     public DeslogarPage sairConta(){
